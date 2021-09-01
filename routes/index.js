@@ -57,6 +57,14 @@ module.exports = (app, passport) => {
   //管理者瀏覽分類
   app.get('/admin/categories', authenticatedAdmin, categoryController.getCategories)
 
+  //管理者新增編輯分類
+  app.post('/admin/categories', authenticatedAdmin, categoryController.postCategory)
+  app.get('/admin/categories/:id', authenticatedAdmin, categoryController.getCategories)
+  app.put('/admin/categories/:id', authenticatedAdmin, categoryController.putCategory)
+
+  //管理者刪除分類
+  app.delete('/admin/categories/:id', authenticatedAdmin, categoryController.deleteCategory)
+
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)
 
