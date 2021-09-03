@@ -72,6 +72,9 @@ module.exports = (app, passport) => {
   //前台新增餐廳評論
   app.post('/comments', authenticated, commentController.postComment)
 
+  //管理者刪除評論
+  app.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)
+
   app.get('/signup', userController.signUpPage)
   app.post('/signup', userController.signUp)
 
