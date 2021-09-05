@@ -69,6 +69,7 @@ module.exports = (app, passport) => {
 
   //前台瀏覽個別餐廳
   app.get('/restaurants/:id', authenticated, restController.getRestaurant)
+  app.get('/restaurants/:id/dashboard', authenticated, restController.getDashboard)
 
   //前台新增餐廳評論
   app.post('/comments', authenticated, commentController.postComment)

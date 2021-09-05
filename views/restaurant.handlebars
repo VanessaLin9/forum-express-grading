@@ -15,6 +15,9 @@
   </div>
   <div class="col-md-8">
     <p>{{restaurant.description}}</p>
+    <a href="/restaurants/{{restaurant.id}}/dashboard" class="btn btn-primary">Dashboard</a>
+    <br />
+    <br />
   </div>
   <hr>
 </div>
@@ -35,6 +38,7 @@
 {{/each}}
 <br />
 <br />
+
 
 <form action="/comments" method="POST">
   <div class="form-group">
