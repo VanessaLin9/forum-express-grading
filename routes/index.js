@@ -83,10 +83,17 @@ module.exports = (app, passport) => {
   //管理者刪除評論
   app.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)
 
+  //美食達人
+  app.get('/users/top', authenticated, userController.getTopUser)
+
   //個人頁面管理
   app.get('/users/:id', authenticated, userController.getUser)
   app.get('/users/:id/edit', authenticated, userController.editUser)
   app.put('/users/:id', authenticated, upload.single('image'), userController.putUser)
+
+  //追蹤功能
+  app.post('/following/:userId', authenticated, userController.addFollowing)
+  app.delete('/following/:userId', authenticated, userController.removeFollowing)
 
 
   app.get('/signup', userController.signUpPage)
