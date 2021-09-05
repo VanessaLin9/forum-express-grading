@@ -3,6 +3,8 @@ const db = require('../models')
 const imgur = require('imgur-node-api')
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
 const User = db.User
+const Comment = db.Comment
+const Restaurant = db.Restaurant
 const helpers = require('../_helpers')
 
 const userController = {
@@ -51,10 +53,24 @@ const userController = {
   },
 
   getUser: (req, res) => {
-    return User.findByPk(req.params.id)
-    .then( user => {
+    const id = req.params.id
+    return Promise.all([
+      User.findByPk(req.params.id),
+      Comment.findAndCountAll({
+        where: { UserId: id },
+        attributes: ['RestaurantId'],
+        group: ['RestaurantId'],
+        include: Restaurant,
+        raw: true,
+        nest: true
+      })
+    ])
+    .then( data => {
+      const [profile, comment] = data
       return res.render('profile', {
-        user: user.toJSON(),
+        profile: profile.toJSON(),
+        commentCount: comment.count.length,
+        commentRestaurant: comment.rows
       })
     })
     .catch(error => console.log(error))
