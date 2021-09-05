@@ -26,9 +26,11 @@ module.exports = (app, passport) => {
   //如果使用者訪問首頁，就導向 /restaurants 的頁面
   app.get('/', authenticated, (req, res) => res.redirect('/restaurants'))
 
-  //在 /restaurants 底下則交給 restController.getRestaurants 來處理
+  //各分頁處理
   app.get('/restaurants', authenticated, restController.getRestaurants)
   app.get('/restaurants/feeds', authenticated, restController.getFeeds)
+  app.get('/restaurants/top', authenticated, restController.getTopRestaurant)
+  app.get('/users/top', authenticated, userController.getTopUser) //美食達人
 
   // 連到 /admin 頁面就轉到 /admin/restaurants
   app.get('/admin', authenticatedAdmin, (req, res) => res.redirect('/admin/restaurants'))
@@ -82,9 +84,6 @@ module.exports = (app, passport) => {
 
   //管理者刪除評論
   app.delete('/comments/:id', authenticatedAdmin, commentController.deleteComment)
-
-  //美食達人
-  app.get('/users/top', authenticated, userController.getTopUser)
 
   //個人頁面管理
   app.get('/users/:id', authenticated, userController.getUser)
