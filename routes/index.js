@@ -74,6 +74,8 @@ module.exports = (app, passport) => {
   //前台新增刪除最愛
   app.post('/favorite/:restaurantId', authenticated, userController.addFavorite)
   app.delete('/favorite/:restaurantId', authenticated, userController.removeFavorite)
+  app.post('/like/:restaurantId', authenticated, userController.likeIt)
+  app.delete('/like/:restaurantId', authenticated, userController.disLike)
 
   //前台新增餐廳評論
   app.post('/comments', authenticated, commentController.postComment)
