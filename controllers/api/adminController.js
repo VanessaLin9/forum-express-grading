@@ -1,5 +1,7 @@
 const db = require('../../models')
 const adminService = require('../../services/adminService')
+const multer = require('multer')
+const upload = multer({ dest: 'temp/' })
 const Restaurant = db.Restaurant
 const Category = db.Category
 
@@ -11,6 +13,11 @@ const adminController = {
   },
   getRestaurant: (req, res) => {
     adminService.getRestaurant(req, res, (data) => {
+      return res.json(data)
+    })
+  },
+   postRestaurant: (req, res) => {
+    adminService.postRestaurant(req, res, (data) => {
       return res.json(data)
     })
   },
