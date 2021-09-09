@@ -16,4 +16,7 @@ router.post('/admin/restaurants', upload.single('image'), adminController.postRe
 //後台修改個別餐廳
 router.put('/admin/restaurants/:id', upload.single('image'), adminController.putRestaurant)
 
+//後台新增類別
+router.post('/admin/categories', categoryController.postCategory)
+
 module.exports = router
